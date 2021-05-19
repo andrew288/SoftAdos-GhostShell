@@ -1,1 +1,4 @@
 django - ultima version
+Angular CLI: 11.2.4
+Node: 16.1.0
+
