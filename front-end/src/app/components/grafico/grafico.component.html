@@ -1,0 +1,40 @@
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col">
+            <button type="button" class="btn btn-primary" (click)="mostrarGrafico()">Mostrar Grafico</button>
+            <div class="mt-4">
+                <highcharts-chart *ngIf="visible" 
+                [Highcharts]="Highcharts"
+                [options]="chart">
+                </highcharts-chart>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col">
+            <button type="button" class="btn btn-primary" (click)="mostrarTablaResumen()">Mostrar Tabla</button>
+            <div class="mt-4">
+                <table class="table" *ngIf="visibleTable">
+                    <thead>
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Entre 10 y 14 años</th>
+                        <th scope="col">Entre 12 y 17 años</th>
+                        <th scope="col">Entre 15 y 19 años</th>
+                        <th scope="col">Informacion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let categoria of this.categorias; index as i">
+                            <th>{{categoria}}</th>
+                            <td>{{this.caso1Array[i]}}</td>
+                            <td>{{this.caso2Array[i]}}</td>
+                            <td>{{this.caso3Array[i]}}</td>
+                            <td> <button class="btn btn-danger btn-sm">Ver articulo</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
