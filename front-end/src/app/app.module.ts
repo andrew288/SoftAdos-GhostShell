@@ -11,6 +11,9 @@ import { ContactComponent } from './components/contact/contact.component';
 import { GraficoComponent } from './components/grafico/grafico.component';
 import { FormsModule } from '@angular/forms';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,9 @@ import { HighchartsChartModule } from 'highcharts-angular';
     LayoutComponent,
     FiltrosComponent,
     ContactComponent,
-    GraficoComponent
+    GraficoComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +32,8 @@ import { HighchartsChartModule } from 'highcharts-angular';
     SharedModule,
     HttpClientModule,
     FormsModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
