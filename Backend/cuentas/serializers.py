@@ -4,7 +4,7 @@ from cuentas.models import Perfiles, Comentarios, Publicaciones, Categorias
 class PerfilesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Perfiles
-        fields = ('id', 'data_modificada')
+        fields = ('id', 'usuario','data_modificada')
 
 
 class ComentariosSerializer(serializers.ModelSerializer):
