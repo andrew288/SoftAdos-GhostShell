@@ -1,10 +1,13 @@
 from rest_framework import serializers
 from cuentas.models import Perfiles, Comentarios, Publicaciones, Categorias
 
+'''
+Clases serializadoras, toman el modelo y retornan la data en fomato Json
+'''
 class PerfilesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Perfiles
-        fields = ('id', 'usuario','data_modificada')
+        fields = ('id', 'usuario', 'foto', 'gener','biografia', 'fecNacimiento', 'estadoCivil', 'data_modificada')
 
 
 class ComentariosSerializer(serializers.ModelSerializer):
