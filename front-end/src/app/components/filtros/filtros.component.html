@@ -1,6 +1,7 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col">
+            <!-- INPUTS PARA EL TIPO DE INFORMACION -->
             <select class="form-select form-select-sm" aria-label="Default select example" [(ngModel)]="selectTipoData">
                 <option selected>Selecciona el tipo de informacion</option>
                 <option value=0>Morbilidad</option>
@@ -9,6 +10,7 @@
             </select>
         </div>
         <div class="col">
+            <!-- INPUTS PARA EL DEPARTAMENTO -->
             <select class="form-select form-select-sm" aria-label="Default select example" [(ngModel)]="selectDepartamento">
                 <option selected>Selecciona un departamento</option>
                 <option value="ANCASH">Ancash</option>
@@ -37,6 +39,7 @@
             </select>
         </div>
         <div class="col">
+            <!-- INPUTS PARA EL SEXO -->
             <select class="form-select form-select-sm" aria-label="Default select example" [(ngModel)]="selectSexo">
                 <option selected>Selecciona tu sexo</option>
                 <option value="M">Hombre</option>
@@ -44,10 +47,12 @@
             </select>
         </div>
     </div>
+    <!-- BOTON PARA LLAMAR A LA FUNCION -->
     <div class="col-auto mt-3 text-center">
         <button (click)="enviarData()" type="button" class="btn btn-secondary">Filtrar</button>
     </div>
     <div>
+        <!-- COMPONENTE GRAFICO -->
         <app-grafico> </app-grafico>
     </div>
 </div>

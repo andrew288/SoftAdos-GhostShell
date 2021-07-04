@@ -7,6 +7,7 @@ import { ServiceDataService } from 'src/app/servicios/service-data.service';
 })
 export class FiltrosComponent implements OnInit {
 
+  //propiedades
   public data:any = []
   public dataGrafico:any = []
 
@@ -17,10 +18,12 @@ export class FiltrosComponent implements OnInit {
 
   constructor(private DataService: ServiceDataService) { }
 
+  // se encargara cuando se inicie el componente
   ngOnInit(): void {
     this.cargarData();
   }
 
+  //cargamos la data usando nuestros servicios
   public cargarData(){
     this.DataService.get(`http://localhost:3000/Morbilidad_Adolescente`)
     .subscribe(respuesta => {
@@ -37,12 +40,15 @@ export class FiltrosComponent implements OnInit {
     console.log(this.data);
   }
 
+  //enviamos información al componente grafico
   public enviarData(){
     console.log("Enviando data...")
+    // Actualizamos nuestros inputs y propiedades a vacio
     let indice= this.selectTipoData
     let tipoData="";
     let sexoData="";
     let depaData="";
+    //indicamos la informacion que queremos obtener
     if(indice==0){
       tipoData="Morbilidad"
     }
@@ -59,11 +65,15 @@ export class FiltrosComponent implements OnInit {
       sexoData="Mujeres"
     }
     depaData= this.selectDepartamento.charAt(0) + this.selectDepartamento.slice(1).toLowerCase();
+    
+    //Filtramos la data 
     for(let i=0;i<this.data[indice].length;i++){
+      //correspondiente a 3 condiciones (Departamento-Sexo)
       if(this.data[indice][i].Departamento==this.selectDepartamento && this.data[indice][i].Sexo==this.selectSexo){
         this.dataGrafico.push(this.data[indice][i]);
       }
     }
+    //enviamos datos al componente grafico
     this.DataService.disparadorGrafico.emit(
       {
         data: this.dataGrafico,
@@ -72,6 +82,7 @@ export class FiltrosComponent implements OnInit {
         sexo: sexoData
       }
     )
+    //vaciamos nuestra data para otras consultas
     this.dataGrafico=[]
   }
 }

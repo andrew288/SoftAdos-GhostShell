@@ -3,6 +3,7 @@
         <div class="col">
             <button type="button" class="btn btn-primary" (click)="mostrarGrafico()">Mostrar Grafico</button>
             <div class="mt-4">
+                <!-- GRAFICO -->
                 <highcharts-chart *ngIf="visible" 
                 [Highcharts]="Highcharts"
                 [options]="chart">
@@ -14,6 +15,7 @@
         <div class="col">
             <button type="button" class="btn btn-primary" (click)="mostrarTablaResumen()">Mostrar Tabla</button>
             <div class="mt-4">
+                <!-- TABLA RESUMEN -->
                 <table class="table" *ngIf="visibleTable">
                     <thead>
                         <tr>
