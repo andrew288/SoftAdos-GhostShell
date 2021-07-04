@@ -9,7 +9,9 @@ from django.utils.text import slugify
 # Create your models here.
 
 class Perfiles(models.Model):
-    '''Creamos un modelo para el manejo de perfiles'''
+    """
+        Creamos un modelo para el manejo de perfiles(tabla)
+    """
     GENERO = (
         ('m', 'Masculino'),
         ('f', 'Feminino'),
@@ -20,7 +22,7 @@ class Perfiles(models.Model):
         ('d', 'Divorciado'),
         ('v', 'Viudo'),
     )
-    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name='usu')
     foto = models.ImageField('Foto de perfil', upload_to='media', height_field=None, width_field=None,blank=True, null=True)
     gener = models.CharField('Genro', max_length=1, choices=GENERO, blank=True, null=True)
     biografia = models.TextField('Descripcion de bigrafia', blank=True, null=True)
@@ -34,7 +36,9 @@ class Perfiles(models.Model):
 
 
 class Comentarios(models.Model):
-    '''Se crea un modelo para que un usuario pueda realizar comentarios'''
+    """
+        Se crea un modelo para que un usuario pueda realizar comentarios(tabla)
+    """
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)
     perfil = models.ForeignKey(Perfiles, on_delete=models.PROTECT)
     comentario = models.CharField(max_length=5000)
@@ -46,7 +50,9 @@ class Comentarios(models.Model):
 
 
 class Categorias(models.Model):
-    '''Se crea un modelo de categorias para que las publicaciones puedan separarse por categorias'''
+    """
+        Se crea un modelo de categorias para que las publicaciones puedan separarse por categorias(tabla)
+    """
     nombre = models.CharField(max_length=100, unique=True)
 
     class Meta:
@@ -58,7 +64,9 @@ class Categorias(models.Model):
 
 
 class Publicaciones(models.Model):
-    '''Se crea un modelo para que el usuario pueda realizar publicaciones'''
+    """
+        Se crea un modelo para que el usuario pueda realizar publicaciones(tabla)
+    """
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)
     perfil = models.ForeignKey(Perfiles, on_delete=models.PROTECT)
     titulo = models.CharField(max_length=255)

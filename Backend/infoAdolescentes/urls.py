@@ -5,7 +5,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path('accounts/', include('cuentas.urls')),
     path('admin/', admin.site.urls),
+    path('api/auth/', include('rest_framework.urls')),
     url(r'^', include('cuentas.urls')),
 ]
 if settings.DEBUG:

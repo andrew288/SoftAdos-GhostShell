@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'ckeditor',
-    #'bootstrap4',
     'cuentas.apps.CuentasConfig',
     
 ]
