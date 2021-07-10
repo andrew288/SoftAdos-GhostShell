@@ -8,6 +8,7 @@ urlpatterns = [
     path('accounts/', include('cuentas.urls')),
     path('admin/', admin.site.urls),
     path('api/auth/', include('rest_framework.urls')),
+    path('', include('public.urls')),
     url(r'^', include('cuentas.urls')),
 ]
 if settings.DEBUG:

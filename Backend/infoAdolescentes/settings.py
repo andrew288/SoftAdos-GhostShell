@@ -28,10 +28,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-CORS_ORIGIN_ALLOW_ALL = False
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost:3000',
-)
+#CORS_ORIGIN_ALLOW_ALL = False
+#CORS_ORIGIN_WHITELIST = (
+#    'http://localhost:3000',
+#)
+
 
 # Application definition
 
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'ckeditor',
     'cuentas.apps.CuentasConfig',
+    'public.apps.PublicConfig'
     
 ]
 
@@ -147,3 +149,8 @@ REST_FRAMEWORK = {
 }
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",
+    "http://127.0.0.1:4200"
+]
