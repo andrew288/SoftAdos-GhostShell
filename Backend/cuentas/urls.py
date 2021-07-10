@@ -6,6 +6,7 @@ from . import views
 urlpatterns = [
     #path('', views.home, name='home'),
     path('profile/', views.UsuarioView.as_view()),
+    path('api/auth/', views.CustomAuthToken.as_view()),
     url(r'^perfiles$', views.PerfilesList.as_view()),
     url(r'^perfiles/(?P<pk>[0-9]+)$', views.PerfilesDetail.as_view()),
     url(r'^publicaciones$', views.PublicacionesList.as_view()),

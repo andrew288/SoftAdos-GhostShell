@@ -47,8 +47,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'ckeditor',
     'cuentas.apps.CuentasConfig',
-    'public.apps.PublicConfig'
-    
+    'public.apps.PublicConfig',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -145,6 +145,7 @@ REST_FRAMEWORK = {
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ),
 }
 MEDIA_URL = '/media/'
