@@ -25,15 +25,15 @@ export class FiltrosComponent implements OnInit {
 
   //cargamos la data usando nuestros servicios
   public cargarData(){
-    this.DataService.get(`http://localhost:3000/Morbilidad_Adolescente`)
+    this.DataService.get(`http://localhost:8000/data/Morbilidad_Adolescente`)
     .subscribe(respuesta => {
       this.data.push(respuesta);
     })
-    this.DataService.get(`http://localhost:3000/Riesgo_Adolescente`)
+    this.DataService.get(`http://localhost:8000/data/Riesgo_Adolescente`)
     .subscribe(respuesta => {
       this.data.push(respuesta);
     })
-    this.DataService.get(`http://localhost:3000/Tamizaje_Adolescente`)
+    this.DataService.get(`http://localhost:8000/data/Tamizaje_Adolescente`)
     .subscribe(respuesta => {
       this.data.push(respuesta);
     })
