@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/servicios/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,11 @@ export class LoginComponent implements OnInit {
   //creamos un FormGroups (propiedad)
   public formLogin!:FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private authSvc:AuthService,
+    private router: Router,
+  ){
   }
 
   //componente que se inicia
@@ -20,11 +26,10 @@ export class LoginComponent implements OnInit {
     this.formLogin = this.formBuilder.group(
       {
         //valores para el campo email
-        email: ['',
+        username: ['',
           //validaciones
           [
             Validators.required,
-            Validators.email
           ]
         ],
         //valores para el campo password
@@ -38,11 +43,14 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-
   //enviamos la informacion
   send(): any {
-    //imprimimos los valores de los campos
-    console.log(this.formLogin.value)
+    const formValue = this.formLogin.value;
+    this.authSvc.login(formValue).subscribe( res => {
+      if(res){
+        this.router.navigate([''])
+      }
+    })
   }
 
 }
