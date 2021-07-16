@@ -89,11 +89,12 @@ class Publicaciones(models.Model):
         self.url = slugify(self.titulo)
         super(Publicaciones, self).save(*args, **kwargs)    
 
+"""
 class Articulos(models.Model):
     titulo = models.CharField(max_length=100, unique=False)
     artfile = models.FileField(upload_to='documents/%Y/%m/%d', blank = False)
 
-
+"""
 
 
 
