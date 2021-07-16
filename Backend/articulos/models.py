@@ -9,7 +9,7 @@ class Articulos(models.Model):
 
     titulo = models.CharField(max_length=100, unique=False)
     pub_fecha = models.DateField(null = True)
-    contenido = models.TextField(null= True)
+    resumen = models.TextField(null= True)
     art_archivo = models.FileField(upload_to='documents/%Y/%m/%d', blank = False)
     posicion = models.CharField(max_length=50, choices=POSICION, default = TOP_MAIN)
     def __str__(self):
