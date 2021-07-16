@@ -1,4 +1,5 @@
 from django.db import models
+from cuentas.models import Categorias 
 
 class Articulos(models.Model):
 
@@ -12,6 +13,8 @@ class Articulos(models.Model):
     resumen = models.TextField(null= True)
     art_archivo = models.FileField(upload_to='documents/%Y/%m/%d', blank = False)
     posicion = models.CharField(max_length=50, choices=POSICION, default = TOP_MAIN)
+    categoria = models.ForeignKey(Categorias, on_delete=(models.RESTRICT), null = True)
+
     def __str__(self):
         return self.titulo 
 
