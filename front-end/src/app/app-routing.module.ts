@@ -1,3 +1,4 @@
+import { CheckLoginGuard } from './shared/guards/check-login.guard';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -6,7 +7,7 @@ import { FiltrosComponent } from './components/filtros/filtros.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
+import { RegisterComponent } from './components/register/register.component'; 
 
 const routes: Routes = [
   {
@@ -28,6 +29,7 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent,
+        canActivate: [CheckLoginGuard],
       },
       {
         path: 'register',
@@ -36,6 +38,10 @@ const routes: Routes = [
       {
         path: 'profile',
         component: PerfilComponent
+      },
+      {
+        path: 'articulo',
+        loadChildren: () => import('./components/articulo/articulo.module').then(m => m.ArticuloModule)
       }
     ]
   },

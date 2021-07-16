@@ -10,12 +10,14 @@
                 <!-- COntactos -->
                 <li class="nav-item"><a class="nav-link" routerLink="/contacto">Contact</a></li>
                 <!-- Iniciar sesion -->
-                <li class="nav-item"><a class="nav-link" routerLink="/login">Log in</a></li>
+                <li class="nav-item" *ngIf="!isLogged;"><a class="nav-link" routerLink="/login">Log in</a></li>
                 <!-- Registrarse -->
-                <li class="nav-item"><a class="nav-link" routerLink="/register">Check in</a></li>
-                <li class="nav-item"><a class="nav-link" routerLink="/profile">Profile</a></li>
-                <li class="nav-item"><button (click)="deslogear()">Salir</button></li>
+                <li class="nav-item" *ngIf="!isLogged; else viewNoLogin"><a class="nav-link" routerLink="/register">Check in</a></li>
             </ul>
         </div>
     </div>
 </nav>
+<ng-template #viewNoLogin>
+    <li class="nav-item"><a class="nav-link" routerLink="/profile">Profile</a></li>
+    <li class="nav-item"><button (click)="deslogear()">Salir</button></li>
+</ng-template>

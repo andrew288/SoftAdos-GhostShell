@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
-
 import { UserResponse, User } from '../components/shared/models/user.interface';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { catchError, map } from 'rxjs/operators';
@@ -17,7 +16,8 @@ export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient, private router: Router) {
-    this.checkToken();
+    //this.checkToken();
+    this.loggedIn.next(false);
   }
 
   get isLogged(): Observable<boolean>{
@@ -30,7 +30,7 @@ export class AuthService {
     .pipe(
       map((res: UserResponse) => {
         console.log('Res -->', res);
-        this.saveToken(res.token,res.foto);
+        this.saveToken(res);
         this.loggedIn.next(true);
         return res;
       }),
@@ -40,11 +40,12 @@ export class AuthService {
 
   logout(): void{
     localStorage.removeItem('token');
+    localStorage.removeItem('foto');
     this.loggedIn.next(false)
   }
 
-  private checkToken(): void{
-    const userToken:string= localStorage.getItem('token') || ''
+  /*private checkToken(): void{
+    const userToken:any= localStorage.getItem('token')
     const isExpired= helper.isTokenExpired(userToken)
     console.log('isExpired-->',isExpired)
     if(isExpired){
@@ -52,11 +53,11 @@ export class AuthService {
     }else{
       this.loggedIn.next(true);
     }
-  }
+  }*/
 
-  private saveToken(token: string, foto: string): void{
-    localStorage.setItem('token',token);
-    localStorage.setItem('foto',foto);
+  private saveToken(res:any): void{
+    localStorage.setItem('token', res.token);
+    localStorage.setItem('foto', res.foto);
   }
 
   private handlerError(err:any): Observable<never> {
