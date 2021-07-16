@@ -88,3 +88,6 @@ class Publicaciones(models.Model):
     def save(self, *args, **kwargs):
         self.url = slugify(self.titulo)
         super(Publicaciones, self).save(*args, **kwargs)    
+
+
+
