@@ -34,21 +34,6 @@ class Perfiles(models.Model):
         return self.usuario.username
 
 
-
-class Comentarios(models.Model):
-    """
-        Se crea un modelo para que un usuario pueda realizar comentarios(tabla)
-    """
-    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
-    perfil = models.ForeignKey(Perfiles, on_delete=models.PROTECT)
-    comentario = models.CharField(max_length=5000)
-
-    def __str__(self):
-        return self.comentario
-
-
-
-
 class Categorias(models.Model):
     """
         Se crea un modelo de categorias para que las publicaciones puedan separarse por categorias(tabla)
@@ -89,12 +74,47 @@ class Publicaciones(models.Model):
         self.url = slugify(self.titulo)
         super(Publicaciones, self).save(*args, **kwargs)    
 
-"""
 class Articulos(models.Model):
-    titulo = models.CharField(max_length=100, unique=False)
-    artfile = models.FileField(upload_to='documents/%Y/%m/%d', blank = False)
 
-"""
+    HOME_MAIN = "HM"
+    BUTTOM_MAIN = "BM"
+    TOP_MAIN = "TM"
+    POSICION = [(HOME_MAIN, "HOME_MAIN"),(BUTTOM_MAIN, "BOTTOM_MAIN"),(TOP_MAIN, "TOP_MAIN"),]
+
+    titulo = models.CharField(max_length=100, unique=False , null = True)
+    autor = models.CharField(max_length=100, unique=False  , null = True)
+    palabras_clave = models.CharField(max_length=200, unique=False, null = True)
+    pub_fecha = models.DateField(null = True)
+    resumen = models.TextField(null= True)
+    art_archivo = models.FileField(upload_to='documents/%Y/%m/%d', null = True)
+    #posicion = models.CharField(max_length=50, choices=POSICION, default = TOP_MAIN)
+    categoria = models.ForeignKey(Categorias, on_delete=(models.RESTRICT), null = True)
+
+    def __str__(self):
+        return self.titulo 
 
 
 
+class Comentarios_publicacion(models.Model):
+    """
+        Se crea un modelo para que un usuario pueda realizar comentarios(tabla)
+    """
+    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
+    perfil = models.ForeignKey(Perfiles, on_delete=models.PROTECT)
+    publicacion = models.ForeignKey(Publicaciones, on_delete=models.PROTECT)
+    comentario = models.TextField(null=True)
+    reply_to = models.ForeignKey("self", null=True, blank=True, on_delete=models.CASCADE, related_name='replies')
+    def __str__(self):
+        return self.usuario
+
+
+class Comentarios_articulo(models.Model):
+    """
+        Se crea un modelo para que un usuario pueda realizar comentarios(tabla)
+    """
+    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
+    perfil = models.ForeignKey(Perfiles, on_delete=models.PROTECT)
+    articulo = models.ForeignKey(Articulos, on_delete=models.PROTECT)
+    comentario = models.TextField(null=True)
+    reply_to = models.ForeignKey("self", null=True, on_delete=models.CASCADE)
+    

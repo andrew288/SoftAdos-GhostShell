@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'ckeditor',
     'cuentas.apps.CuentasConfig',
-    'articulos.apps.ArticulosConfig',
     
 ]
 
