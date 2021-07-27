@@ -44,10 +44,7 @@ class Comentarios(models.Model):
     comentario = models.CharField(max_length=5000)
 
     def __str__(self):
-        return self.comentario
-
-
-
+        return self.usuario
 
 class Categorias(models.Model):
     """
