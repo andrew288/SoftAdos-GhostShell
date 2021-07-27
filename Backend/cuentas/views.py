@@ -1,9 +1,11 @@
 
 from django.shortcuts import render, get_object_or_404
 from rest_framework import generics
-from .models import Perfiles, Comentarios, Publicaciones, Categorias
 from .serializers import PerfilesSerializer, ComentariosSerializer, PublicacionesSerializer, CategoriasSerializer
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication, BasicAuthentication
+from .models import Articulos, Perfiles, Comentarios_publicacion,Comentarios_articulo, Publicaciones, Categorias
+from .serializers import PerfilesSerializer, ComentariosSerializer, PublicacionesSerializer, CategoriasSerializer ,ArticulosSerializer
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -70,18 +72,35 @@ class PerfilesDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PerfilesSerializer
 
 
+class ArticulosList(generics.ListCreateAPIView):
+    """
+        Clase generica para  lectura y escritura de comentarios
+    """
+    queryset = Articulos.objects.all()
+    serializer_class = ArticulosSerializer
+
+class ArticulosDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+        Clase generica de comentarios, , se utiliza para puntos finales de lectura, escritura y eliminación
+    """
+    queryset = Articulos.objects.all()
+    serializer_class = ArticulosSerializer
+
+
+
+
 class ComentariosList(generics.ListCreateAPIView):
     """
         Clase generica para  lectura y escritura de comentarios
     """
-    queryset = Comentarios.objects.all()
+    queryset = Comentarios_articulo.objects.all()
     serializer_class = ComentariosSerializer
 
 class ComentariosDetail(generics.RetrieveUpdateDestroyAPIView):
     """
         Clase generica de comentarios, , se utiliza para puntos finales de lectura, escritura y eliminación
     """
-    queryset = Comentarios.objects.all()
+    queryset = Comentarios_articulo.objects.all()
     serializer_class = ComentariosSerializer
 
 
