@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceDataService } from 'src/app/servicios/service-data.service';
 import * as Highcharts from "highcharts";
+import { getNumberOfCurrencyDigits } from '@angular/common';
+import { identifierModuleUrl } from '@angular/compiler';
 
 @Component({
   selector: 'app-grafico',
@@ -157,6 +159,118 @@ export class GraficoComponent implements OnInit {
   ngOnInit(): void {
     console.log("Se inicio el componente...")
     this.cargarData()
+  }
+
+  obtenerIdArticulo(name:string): any{
+    var id;
+    switch(name){
+      case "ACNE NO ESPECIFICADO":
+        id="1";
+        break;
+      case "ANEMIA POR DEFICIENCIA DE HIERRO":
+        id="2";
+        break;
+      case "CIFOSIS POSTURAL":
+        id="3";
+        break;
+      case "DISMINUCIÓN DE LA AGUDEZA VISUAL SIN ESPECIFICACION":
+        id="4";
+        break;
+      case "ESCOLIOSIS IDIOPATICA JUVENIL":
+        id="5";
+        break;
+      case "ESCOLIOSIS NO ESPECIFICADA":
+        id="6";
+        break;
+      case "INFECCIONES RESPIRATORIAS AGUDAS COMPLICADAS":
+        id="7";
+        break;
+      case "INFECCIONES RESPIRATORIAS AGUDAS NO COMPLICADAS":
+        id="8";
+        break;
+      case "LORDOSIS NO ESPECIFICADA":
+        id="9";
+        break;
+      case "PARASITOSIS INTESTINAL":
+        id="10";
+        break;
+      case "PIE PLANO":
+        id="11";
+        break;
+      case "OTROS PROBLEMAS RELACIONADOS CON EL ESTILO DE VIDA":
+        id="12";
+        break;
+      case "OTROS PROBLEMAS RELACIONADOS CON EL GRUPO PRIMARIO DE APOYO":
+        id="13";
+        break;
+      case "PROBLEMAS RELACIONADOS CON EL JUEGO Y LAS APUESTAS":
+        id="14";
+        break;
+      case "PROBLEMAS RELACIONADOS CON OTRAS CIRCUNSTANCIAS PSICOSOCIALES - DESARROLLO PSICOSOCIAL":
+        id="15";
+        break;
+      case "PROBLEMAS RELACIONADOS CON OTRAS CIRCUNSTANCIAS PSICOSOCIALES - VIH/SIDA":
+        id="16";
+        break;
+      case "RIESGO DE EMBARAZO POR CONDUCTA SEXUAL DE ALTO RIESGO":
+        id="17";
+        break;
+      case "RIESGO DE ETS POR CONDUCTA SEXUAL DE ALTO":
+        id="18";
+        break;
+      case "A OTROS CONTAMINANTES DEL AMBIENTE FÍSICO":
+        id="19";
+        break;
+      case "AL AGUA CONTAMINADA":
+        id="20";
+        break;
+      case "AL AIRE CONTAMINADO":
+        id="21";
+        break;
+      case "AL SUELO CONTAMINADO":
+        id="22";
+        break;
+      case "ALCOHOL Y DROGAS":
+        id="23";
+        break;
+      case "DEPRESIÓN":
+        id="24";
+        break;
+      case "POR EXPOSICION A DESASTRE":
+        id="25";
+        break;
+      case "POR VIOLENCIA POLITICA (VICTIMA DE CRIMEN O TERRORISMO":
+        id="26";
+        break;
+      case "PROBLEMAS RELACIONADOS CON EL USO DE ALCOHOL":
+        id="27";
+        break;
+      case "PROBLEMAS RELACIONADOS CON EL USO DE DROGAS":
+        id="28";
+        break;
+      case "PROBLEMAS RELACIONADOS CON EL USO DE TABACO":
+        id="29";
+        break;
+      case "PROBLEMAS RELACIONADOS CON VIOLENCIA":
+        id="30";
+        break;
+      case "PSICOSIS":
+        id="31";
+        break;
+      case "TRASTORNOS DEPRESIVOS":
+        id="32";
+        break;
+      case "VIOLENCIA FAMILIAR":
+        id="33";
+        break;
+      case "VIOLENCIA SEXUAL":
+        id="34";
+        break;
+      case "VIOLENCIA SOCIAL":
+        id="35";
+        break;
+    }
+    return "/articulo/"+id;
   }
 
 }

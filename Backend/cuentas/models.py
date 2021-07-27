@@ -78,7 +78,7 @@ class Articulos(models.Model):
     BUTTOM_MAIN = "BM"
     TOP_MAIN = "TM"
     POSICION = [(HOME_MAIN, "HOME_MAIN"),(BUTTOM_MAIN, "BOTTOM_MAIN"),(TOP_MAIN, "TOP_MAIN"),]
-
+    id = models.PositiveIntegerField(primary_key=True)
     titulo = models.CharField(max_length=100, unique=False , null = True)
     autor = models.CharField(max_length=100, unique=False  , null = True)
     palabras_clave = models.CharField(max_length=200, unique=False, null = True)

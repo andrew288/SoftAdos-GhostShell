@@ -32,7 +32,7 @@
                             <td>{{this.caso1Array[i]}}</td>
                             <td>{{this.caso2Array[i]}}</td>
                             <td>{{this.caso3Array[i]}}</td>
-                            <td> <button class="btn btn-danger btn-sm">Ver articulo</button></td>
+                            <td> <button [routerLink]='obtenerIdArticulo(categoria)' class="btn btn-danger btn-sm">Ver articulo</button></td>
                         </tr>
                     </tbody>
                 </table>

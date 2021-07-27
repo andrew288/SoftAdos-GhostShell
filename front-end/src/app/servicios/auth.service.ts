@@ -6,14 +6,16 @@ import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { UserResponse, User } from '../components/shared/models/user.interface';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { catchError, map } from 'rxjs/operators';
+import { HttpHeaders } from '@angular/common/http';
 
 const helper = new JwtHelperService();
-
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(false);
+  httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+
 
   constructor(private http: HttpClient, private router: Router) {
     //this.checkToken();
@@ -68,4 +70,11 @@ export class AuthService {
     window.alert(errorMessage);
     return throwError(errorMessage);
   }
+
+  createMovie(categoria:any): Observable<any> {
+    const body = {nombre: categoria.nombre};
+    return this.http.post('http://127.0.0.1:8000/categorias', body,
+    {headers: this.httpHeaders});
+  }
+
 }
