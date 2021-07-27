@@ -1,3 +1,4 @@
+import { ArticuloComponent } from './components/articulo/articulo/articulo.component';
 import { CheckLoginGuard } from './shared/guards/check-login.guard';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { NgModule } from '@angular/core';
@@ -37,11 +38,11 @@ const routes: Routes = [
       },
       {
         path: 'profile',
-        component: PerfilComponent
+        component: PerfilComponent,
       },
       {
-        path: 'articulo',
-        loadChildren: () => import('./components/articulo/articulo.module').then(m => m.ArticuloModule)
+        path: 'articulo/:id',
+        component: ArticuloComponent,
       }
     ]
   },
