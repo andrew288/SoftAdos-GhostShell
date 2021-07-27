@@ -86,7 +86,7 @@ class Articulos(models.Model):
     palabras_clave = models.CharField(max_length=200, unique=False, null = True)
     pub_fecha = models.DateField(null = True)
     resumen = models.TextField(null= True)
-    art_archivo = models.FileField(upload_to='documents/%Y/%m/%d', null = True)
+    art_archivo = models.FileField(upload_to='documents/', null = True)
     #posicion = models.CharField(max_length=50, choices=POSICION, default = TOP_MAIN)
     categoria = models.ForeignKey(Categorias, on_delete=(models.RESTRICT), null = True)
 
@@ -116,5 +116,5 @@ class Comentarios_articulo(models.Model):
     perfil = models.ForeignKey(Perfiles, on_delete=models.PROTECT)
     articulo = models.ForeignKey(Articulos, on_delete=models.PROTECT)
     comentario = models.TextField(null=True)
-    reply_to = models.ForeignKey("self", null=True, on_delete=models.CASCADE)
+    reply_to = models.ForeignKey("self", null=True, blank=True, on_delete=models.CASCADE, related_name='replies')
     

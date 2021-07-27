@@ -1,8 +1,8 @@
 
 from django.shortcuts import render
 from rest_framework import generics
-from .models import Perfiles, Comentarios_publicacion,Comentarios_articulo, Publicaciones, Categorias
-from .serializers import PerfilesSerializer, ComentariosSerializer, PublicacionesSerializer, CategoriasSerializer
+from .models import Articulos, Perfiles, Comentarios_publicacion,Comentarios_articulo, Publicaciones, Categorias
+from .serializers import PerfilesSerializer, ComentariosSerializer, PublicacionesSerializer, CategoriasSerializer ,ArticulosSerializer
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -36,6 +36,23 @@ class PerfilesDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = Perfiles.objects.all()
     serializer_class = PerfilesSerializer
+
+
+class ArticulosList(generics.ListCreateAPIView):
+    """
+        Clase generica para  lectura y escritura de comentarios
+    """
+    queryset = Articulos.objects.all()
+    serializer_class = ArticulosSerializer
+
+class ArticulosDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+        Clase generica de comentarios, , se utiliza para puntos finales de lectura, escritura y eliminación
+    """
+    queryset = Articulos.objects.all()
+    serializer_class = ArticulosSerializer
+
+
 
 
 class ComentariosList(generics.ListCreateAPIView):

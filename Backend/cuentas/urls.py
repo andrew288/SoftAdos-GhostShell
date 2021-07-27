@@ -14,5 +14,8 @@ urlpatterns = [
     url(r'^comentarios/(?P<pk>[0-9]+)$', views.ComentariosDetail.as_view()),
     url(r'^categorias$', views.CategoriasList.as_view()),
     url(r'^categorias/(?P<pk>[0-9]+)$', views.CategoriasDetail.as_view()),
+    
+    url(r'^articulos$', views.ArticulosList.as_view()),
+    url(r'^articulos/(?P<pk>[0-9]+)$', views.ArticulosDetail.as_view()),
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)
