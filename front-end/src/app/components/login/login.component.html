@@ -1,21 +1,55 @@
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-auto">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+<div class="container contenedor">
+    <div class="card bg-light">
+        <article class="card-body mx-auto" style="max-width: 400px;">
+            <h4 class="card-title mt-3 text-center">Iniciar sesion</h4>
+            <p class="text-center">Completa todos los campos para iniciar sesion</p>
             <form [formGroup]="formLogin" (submit)="send()">
-                <!-- INPUT EMAIL-->
-                <div class="mb-3">
-                    <label for="email" class="form-label">Username</label>
-                    <input type="text" id="email" formControlName="username" class="form-control">
+                <!-- form-group username// -->
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                     </div>
+                    <input name="" class="form-control" formControlName="username" placeholder="Username" type="text">
                 </div>
-                <!-- INPUT PASSWORD-->
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" formControlName="password" class="form-control">
+                <!-- form-group password// -->
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                    </div>
+                    <input class="form-control" formControlName="password" placeholder="Password" type="password">
                 </div>
-                <div>
-                    <button [disabled]="formLogin.invalid" class="btn btn-primary">Send</button>
-                </div>
+                <div class="form-group">
+                    <button type="submit" [disabled]="formLogin.invalid" class="btn btn-dark btn-block">Ingresar</button>
+                </div> <!-- form-group// -->  
+                <p class="text-center">¿No tienes una cuenta? <a routerLink="/register">Registrate</a></p>
             </form>
-        </div>
+        </article>
     </div>
 </div>
+
+<!--SEGUNDA OPCION
+<div class="row justify-content-center">
+    <div class="col-auto">
+        <form [formGroup]="formLogin" (submit)="send()">
+            INPUT EMAIL
+            <div class="mb-3">
+                <label for="email" class="form-label">Username</label>
+                <input type="text" id="email" placeholder="Username" formControlName="username" class="form-control">
+            </div>
+            INPUT PASSWORD
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" placeholder="password" formControlName="password" class="form-control">
+            </div>
+            <div>
+                <input type="submit" [disabled]="formLogin.invalid" value="Enviar">
+            </div>
+        </form>
+    </div>
+</div>-->

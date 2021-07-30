@@ -84,6 +84,7 @@ class Articulos(models.Model):
     palabras_clave = models.CharField(max_length=200, unique=False, null = True)
     pub_fecha = models.DateField(null = True)
     resumen = models.TextField(null= True)
+    contenido = models.TextField(null=True)
     art_archivo = models.FileField(upload_to='documents/', null = True)
     #posicion = models.CharField(max_length=50, choices=POSICION, default = TOP_MAIN)
     categoria = models.ForeignKey(Categorias, on_delete=(models.RESTRICT), null = True)

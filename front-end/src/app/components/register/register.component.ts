@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/servicios/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -10,8 +11,12 @@ export class RegisterComponent implements OnInit {
 
   //creamos un FormGroups (propiedad)
   public formRegister!:FormGroup;
+  public users:any;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private serv: AuthService,
+    ) { }
 
   //componente que se inicia 
   ngOnInit(): void {
@@ -19,22 +24,20 @@ export class RegisterComponent implements OnInit {
     this.formRegister = this.formBuilder.group(
       {
         //obtenemos valores para el campo name
-        name: ['',
+        first_name: ['',
         //validaciones
           [
             Validators.required
           ]
         ],
         //obtenemos valores para el campo lastname
-        lastname: ['',
+        last_name: ['',
         //validaciones
           [
             Validators.required
           ]
         ],
-        //obtenemos valores para el campo sexo
-        sexo: ['',
-        //validaciones
+        username: ['',
           [
             Validators.required
           ]
@@ -55,29 +58,21 @@ export class RegisterComponent implements OnInit {
             Validators.minLength(6)
           ]
         ],
-        //obtenemos valores para el campo passwordC
-        passwordC: ['',
-        //validaciones
-          [
-            Validators.required,
-            Validators.minLength(6)
-          ]
-        ]
       }
     );
   }
 
   //enviamos los datos
   send(): any {
-    //imprimimps los valores de los inputs
-    console.log(this.formRegister.value)
-    //verfiicamos que el password y confirmar password sean iguales
-    if(this.formRegister.value.password!=this.formRegister.value.passwordC){
-      console.log("Las contraseñas no coinciden")
-    }
-    else{
-      console.log("Las contraseñas coinciden")
-    }
+    this.serv.createUser(this.formRegister.value).subscribe(
+      data => {
+        this.users.push(data);
+      },
+      error => {
+        console.log(this.formRegister.value);
+        console.log(error);
+      }
+    );
   }
 
 }

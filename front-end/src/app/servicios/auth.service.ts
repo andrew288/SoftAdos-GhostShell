@@ -71,9 +71,9 @@ export class AuthService {
     return throwError(errorMessage);
   }
 
-  createMovie(categoria:any): Observable<any> {
-    const body = {nombre: categoria.nombre};
-    return this.http.post('http://127.0.0.1:8000/categorias', body,
+  createUser(user :any): Observable<any> {
+    const body =  {first_name : user.first_name,last_name : user.last_name,email : user.email,username : user.username,password : user.password};
+    return this.http.post('http://localhost:8000' + '/user', body,
     {headers: this.httpHeaders});
   }
 

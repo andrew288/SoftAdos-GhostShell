@@ -15,8 +15,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PerfilComponent } from './components/perfil/perfil.component';
-import { PruebaComponent } from './components/prueba/prueba.component';
-
+import { ArticuloComponent } from './components/articulo/articulo/articulo.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +27,7 @@ import { PruebaComponent } from './components/prueba/prueba.component';
     LoginComponent,
     RegisterComponent,
     PerfilComponent,
-    PruebaComponent
+    ArticuloComponent,
   ],
   imports: [
     BrowserModule,

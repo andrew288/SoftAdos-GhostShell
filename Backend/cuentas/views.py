@@ -1,7 +1,7 @@
 
 from django.shortcuts import render, get_object_or_404
 from rest_framework import generics
-from .serializers import PerfilesSerializer, ComentariosSerializer, PublicacionesSerializer, CategoriasSerializer
+from .serializers import PerfilesSerializer, ComentariosSerializer, PublicacionesSerializer, CategoriasSerializer, UserSerializer
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication, BasicAuthentication
 from .models import Articulos, Perfiles, Comentarios_publicacion,Comentarios_articulo, Publicaciones, Categorias
 from .serializers import PerfilesSerializer, ComentariosSerializer, PublicacionesSerializer, CategoriasSerializer ,ArticulosSerializer
@@ -12,22 +12,11 @@ from rest_framework.views import APIView
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
+from django.contrib.auth.models import User
+
 import base64
 
-
 # Crear vistas.
-
-class UsuarioView(APIView):
-    authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request, format=None):
-        content = {
-            'user': str(request.user),
-            'auth': str(request.auth),
-        }
-        return Response(content)
-
 
 class CustomAuthToken(ObtainAuthToken):
 
@@ -38,11 +27,12 @@ class CustomAuthToken(ObtainAuthToken):
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
         perfilUser =  get_object_or_404(Perfiles,usuario=user.pk)
-        print("Tipo de variable: ",type(perfilUser.foto))
-        image = perfilUser.foto.open('rb')
-        image_read = image.read()
-        image_64 = base64.encodestring(image_read)
-        print("Imagen 64: ",image_64)
+        image_64=""
+        if(perfilUser.foto):
+            image = perfilUser.foto.open('rb')
+            image_read = image.read()
+            image_64 = base64.encodestring(image_read)
+
         return Response({
             'token': token.key,
             'username': user.username,
@@ -55,6 +45,13 @@ class CustomAuthToken(ObtainAuthToken):
             'biografia':perfilUser.biografia,
             'estado_civil':perfilUser.estadoCivil,
         })
+
+class UsuarioList(generics.ListCreateAPIView):
+    """
+        Clase generica para  lectura y escritura de perfiles
+    """
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
 class PerfilesList(generics.ListCreateAPIView):

@@ -1,4 +1,3 @@
-import { PruebaComponent } from './components/prueba/prueba.component';
 import { ArticuloComponent } from './components/articulo/articulo/articulo.component';
 import { CheckLoginGuard } from './shared/guards/check-login.guard';
 import { PerfilComponent } from './components/perfil/perfil.component';
@@ -45,10 +44,6 @@ const routes: Routes = [
         path: 'articulo/:variable',
         component: ArticuloComponent,
       },
-      {
-        path: 'pruebas',
-        component: PruebaComponent,
-      }
     ]
   },
 ];
