@@ -1,7 +1,7 @@
 
 from django.shortcuts import render, get_object_or_404
 from rest_framework import generics
-from .serializers import PerfilesSerializer, ComentariosSerializer, PublicacionesSerializer, CategoriasSerializer, UserSerializer
+from .serializers import PerfilesSerializer, ComentariosSerializer, PublicacionesSerializer, CategoriasSerializer, UserSerializer, UserGetSerializer
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication, BasicAuthentication
 from .models import Articulos, Perfiles, Comentarios_publicacion,Comentarios_articulo, Publicaciones, Categorias
 from .serializers import PerfilesSerializer, ComentariosSerializer, PublicacionesSerializer, CategoriasSerializer ,ArticulosSerializer
@@ -18,6 +18,16 @@ import base64
 
 # Crear vistas.
 
+class ProfileView(APIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permissions_classes = [IsAuthenticated]
+    def get(self,request,format=None):
+        content = {
+            'user': str(request.user.email),
+            'auth': str(request.auth),
+        }
+        return Response(content)
+
 class CustomAuthToken(ObtainAuthToken):
 
     def post(self, request, *args, **kwargs):
@@ -33,18 +43,16 @@ class CustomAuthToken(ObtainAuthToken):
             image_read = image.read()
             image_64 = base64.encodestring(image_read)
 
-        return Response({
+        print(user.pk)
+        content = {
             'token': token.key,
             'username': user.username,
             'first_name': user.first_name,
             'last_name': user.last_name,
             'user_id': user.pk,
             'email': user.email,
-            'genero': perfilUser.gener,
-            'foto': image_64,
-            'biografia':perfilUser.biografia,
-            'estado_civil':perfilUser.estadoCivil,
-        })
+        }
+        return Response(content)
 
 class UsuarioList(generics.ListCreateAPIView):
     """
@@ -53,6 +61,12 @@ class UsuarioList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+class UsuarioDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+        Clase generica para  lectura y escritura de perfiles
+    """
+    queryset = User.objects.all()
+    serializer_class = UserGetSerializer
 
 class PerfilesList(generics.ListCreateAPIView):
     """
@@ -82,9 +96,6 @@ class ArticulosDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = Articulos.objects.all()
     serializer_class = ArticulosSerializer
-
-
-
 
 class ComentariosList(generics.ListCreateAPIView):
     """

@@ -16,6 +16,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { ArticuloComponent } from './components/articulo/articulo/articulo.component';
+import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +29,7 @@ import { ArticuloComponent } from './components/articulo/articulo/articulo.compo
     RegisterComponent,
     PerfilComponent,
     ArticuloComponent,
+    ProfileEditComponent,
   ],
   imports: [
     BrowserModule,

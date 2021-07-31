@@ -22,12 +22,28 @@ class Perfiles(models.Model):
         ('d', 'Divorciado'),
         ('v', 'Viudo'),
     )
+    ROL = (
+        ('a','Administrador'),
+        ('u','Usuario'),
+        ('e','Especialista'),
+    )
+    ESTATUS = (
+        ('f','Usuario destacado'),
+        ('c','Creador de contenido'),
+        ('u','Usuario nuevo'),
+    )
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name='usu')
     foto = models.ImageField('Foto de perfil', upload_to='media', height_field=None, width_field=None,blank=True, null=True)
-    gener = models.CharField('Genro', max_length=1, choices=GENERO, blank=True, null=True)
+    genero = models.CharField('Genero', max_length=1, choices=GENERO, blank=True, null=True)
     biografia = models.TextField('Descripcion de bigrafia', blank=True, null=True)
     fecNacimiento = models.DateField('Fecha de nacimiento', blank=True, null=True)
-    estadoCivil = models.CharField(max_length=1, choices=ESTADO_CIVIL, blank=True, null=True)
+    rol = models.CharField('Rol', max_length=1, choices=ROL, default='u')
+    estatus = models.CharField('Estatus', max_length=1, default='u',choices=ESTATUS)
+    direccion = models.TextField('Direccion',blank=True, null=True)
+    url_website = models.CharField('Web Site', max_length=255, blank=True, null=True)
+    url_twitter = models.CharField('Twitter', max_length=255, blank=True, null=True)
+    url_instagram = models.CharField('Instagram', max_length=255, blank=True, null=True)
+    url_facebook = models.CharField('Facebook', max_length=255, blank=True, null=True)
     data_modificada = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -85,7 +101,7 @@ class Articulos(models.Model):
     pub_fecha = models.DateField(null = True)
     resumen = models.TextField(null= True)
     contenido = models.TextField(null=True)
-    art_archivo = models.FileField(upload_to='documents/', null = True)
+    art_archivo = models.FileField(upload_to='documents/', blank=True, null = True)
     #posicion = models.CharField(max_length=50, choices=POSICION, default = TOP_MAIN)
     categoria = models.ForeignKey(Categorias, on_delete=(models.RESTRICT), null = True)
 

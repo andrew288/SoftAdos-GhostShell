@@ -21,6 +21,10 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
+class UserGetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=User
+        fields = ('first_name','last_name','email','username')
 
 class PerfilesSerializer(serializers.ModelSerializer):
     """
@@ -28,7 +32,7 @@ class PerfilesSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Perfiles
-        fields = ('id', 'usuario', 'foto', 'gener','biografia', 'fecNacimiento', 'estadoCivil', 'data_modificada')
+        fields = ('id', 'foto', 'genero', 'biografia', 'fecNacimiento', 'rol', 'estatus', 'direccion','url_website', 'url_twitter','url_instagram','url_facebook')
 
 
 class PerfilesConDatosUsuarioSerializer(serializers.ModelSerializer):

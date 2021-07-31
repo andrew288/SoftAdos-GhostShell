@@ -32,7 +32,7 @@ export class AuthService {
     .pipe(
       map((res: UserResponse) => {
         console.log('Res -->', res);
-        this.saveToken(res);
+        this.saveData(res);
         this.loggedIn.next(true);
         return res;
       }),
@@ -46,20 +46,9 @@ export class AuthService {
     this.loggedIn.next(false)
   }
 
-  /*private checkToken(): void{
-    const userToken:any= localStorage.getItem('token')
-    const isExpired= helper.isTokenExpired(userToken)
-    console.log('isExpired-->',isExpired)
-    if(isExpired){
-      this.logout();
-    }else{
-      this.loggedIn.next(true);
-    }
-  }*/
-
-  private saveToken(res:any): void{
+  private saveData(res:any): void{
     localStorage.setItem('token', res.token);
-    localStorage.setItem('foto', res.foto);
+    localStorage.setItem('id', res.user_id);
   }
 
   private handlerError(err:any): Observable<never> {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceDataService } from 'src/app/servicios/service-data.service';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-filtros',
   templateUrl: './filtros.component.html',
@@ -25,15 +26,15 @@ export class FiltrosComponent implements OnInit {
 
   //cargamos la data usando nuestros servicios
   public cargarData(){
-    this.DataService.get(`http://localhost:8000/data/Morbilidad_Adolescente`)
+    this.DataService.get(`${environment.API_URL}data/Morbilidad_Adolescente`)
     .subscribe(respuesta => {
       this.data.push(respuesta);
     })
-    this.DataService.get(`http://localhost:8000/data/Riesgo_Adolescente`)
+    this.DataService.get(`${environment.API_URL}data/Riesgo_Adolescente`)
     .subscribe(respuesta => {
       this.data.push(respuesta);
     })
-    this.DataService.get(`http://localhost:8000/data/Tamizaje_Adolescente`)
+    this.DataService.get(`${environment.API_URL}data/Tamizaje_Adolescente`)
     .subscribe(respuesta => {
       this.data.push(respuesta);
     })

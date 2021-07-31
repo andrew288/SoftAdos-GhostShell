@@ -10,8 +10,4 @@ export interface UserResponse extends User {
     last_name: string,
     user_id: number,
     email: string,
-    genero: string,
-    foto: string,
-    biografia: string,
-    estado_civil:string,
 }
