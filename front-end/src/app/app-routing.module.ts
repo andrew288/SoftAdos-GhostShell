@@ -48,6 +48,10 @@ const routes: Routes = [
       {
         path: 'profile-edit',
         component: ProfileEditComponent,
+      },
+      {
+        path: 'analisis',
+        loadChildren:()=> import('./components/analisis/analisis.module').then(m=>m.AnalisisModule)
       }
     ]
   },

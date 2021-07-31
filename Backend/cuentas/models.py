@@ -110,7 +110,6 @@ class Articulos(models.Model):
         return self.titulo 
 
 
-
 class Comentarios_publicacion(models.Model):
     """
         Se crea un modelo para que un usuario pueda realizar comentarios(tabla)

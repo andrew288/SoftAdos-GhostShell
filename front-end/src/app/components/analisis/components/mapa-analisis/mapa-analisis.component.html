@@ -1,0 +1,43 @@
+<div class="container mt-2">
+    <h2 class="text-center">Mapa informativo</h2>
+    <div class="row mt-4">
+        <div class="col">
+            <!-- INPUTS PARA EL DEPARTAMENTO -->
+            <select class="form-select form-select-sm" [(ngModel)]="selectDepartamento" aria-label="Default select example">
+                <option selected>Selecciona un departamento</option>
+                <option value=0>Ancash</option>
+                <option value=1>Apurimac</option>
+                <option value=2>Arequipa</option>
+                <option value=3>Ayacucho</option>
+                <option value=4>Cajamarca</option>
+                <option value=5>Callao</option>
+                <option value=6>Cusco</option>
+                <option value=7>Huancavelica</option>
+                <option value=8>Huanuco</option>
+                <option value=9>Ica</option>
+                <option value=10>Junin</option>
+                <option value=11>La Libertad</option>
+                <option value=12>Lambayeque</option>
+                <option value=13>Lima</option>
+                <option value=14>Loreto</option>
+                <option value=15>Madre de Dios</option>
+                <option value=16>Moquegua</option>
+                <option value=17>Pasco</option>
+                <option value=18>Piura</option>
+                <option value=19>Puno</option>
+                <option value=20>San Martin</option>
+                <option value=21>Tacna</option>
+                <option value=22>Ucayali</option>
+            </select>
+        </div>
+    </div>
+    <!-- BOTON PARA LLAMAR A LA FUNCION -->
+    <div class="col-auto mt-3 text-center">
+        <button type="button" class="btn btn-secondary" (click)="construirMapa()">Filtrar</button>
+    </div>
+    <div class="row mt-3 mb-5 text-center">
+        <div class="col">
+            <div [innerHTML]="mapaFrame"></div>
+        </div>
+    </div>
+</div>

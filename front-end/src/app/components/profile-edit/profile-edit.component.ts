@@ -2,6 +2,7 @@ import { ServiceDataService } from 'src/app/servicios/service-data.service';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-profile-edit',
@@ -11,7 +12,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ProfileEditComponent implements OnInit {
   public infoPerfil:any=[];
   public formProfile!:FormGroup;
+  public model!: NgbDateStruct;
   constructor(
+
     private serv:ServiceDataService,
     private formBuilder: FormBuilder,
   ) { }
@@ -42,7 +45,12 @@ export class ProfileEditComponent implements OnInit {
               Validators.minLength(1),
             ]
           ],
-          sexo: ['',]
+          sexo: [this.infoPerfil.sexo,],
+          fecNacimiento: [this.infoPerfil.fecNacimiento],
+          url_website:[this.linkWebsite(this.infoPerfil.url_website)],
+          url_twitter:[this.linkTwitter(this.infoPerfil.url_twitter)],
+          url_instagram:[this.linkInstagram(this.infoPerfil.url_instagram)],
+          url_facebook:[this.linkFacebook(this.infoPerfil.url_facebook)],
         }
       )
     });
@@ -52,8 +60,44 @@ export class ProfileEditComponent implements OnInit {
     console.log(formValue)
   }
 
+  linkWebsite(cadena:string): string {
+    if(cadena==""){
+      return "https://www.google.com.mx/"
+    }
+    else{
+      return cadena;
+    }
+  }
+
+  linkTwitter(cadena:string): string {
+    if(cadena==""){
+      return "https://twitter.com/"
+    }
+    else{
+      return cadena;
+    }
+  }
+
+  linkInstagram(cadena:string): string {
+    if(cadena==""){
+      return "https://www.instagram.com/"
+    }
+    else{
+      return cadena;
+    }
+  }
+
+  linkFacebook(cadena:string): string {
+    if(cadena==""){
+      return "https://www.facebook.com/"
+    }
+    else{
+      return cadena;
+    }
+  }
+
   obtenerNombreCompleto():string{
-    return `${this.infoPerfil.first_name} ${this.infoPerfil.last_name}`
+    return `${this.infoPerfil.usuario.first_name} ${this.infoPerfil.usuario.last_name}`
   }
 
   obtenerSexo():string{

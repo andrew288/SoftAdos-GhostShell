@@ -14,7 +14,7 @@ export class FiltrosComponent implements OnInit {
 
   //recoger datos de los inputs
   public selectTipoData:number=0;
-  public selectDepartamento:string="Arequipa"
+  public selectDepartamento:string="AREQUIPA"
   public selectSexo:string="M"
 
   constructor(private DataService: ServiceDataService) { }
@@ -51,10 +51,10 @@ export class FiltrosComponent implements OnInit {
     let depaData="";
     //indicamos la informacion que queremos obtener
     if(indice==0){
-      tipoData="Morbilidad"
+      tipoData="Riesgo"
     }
     if(indice==1){
-      tipoData="Riesgo"
+      tipoData="Morbilidad"
     }
     if(indice==2){
       tipoData="Tamizaje"

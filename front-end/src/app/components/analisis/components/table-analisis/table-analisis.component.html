@@ -1,17 +1,18 @@
-<div class="container mt-5">
-    <div class="row">
+<div class="container-fluid mt-3">
+    <h2 class="text-center">Tabla de contenidos</h2>
+    <div class="row mt-4">
         <div class="col">
             <!-- INPUTS PARA EL TIPO DE INFORMACION -->
             <select class="form-select form-select-sm" [(ngModel)]="selectTipoData">
                 <option [selected]="true">Selecciona el tipo de informacion</option>
-                <option value=1>Morbilidad</option>
-                <option value=0>Riesgo</option>
-                <option value=2>Tamizaje</option>
+                <option value="Morbilidad_Adolescente">Morbilidad</option>
+                <option value="Riesgo_Adolescente">Riesgo</option>
+                <option value="Tamizaje_Adolescente">Tamizaje</option>
             </select>
         </div>
         <div class="col">
             <!-- INPUTS PARA EL DEPARTAMENTO -->
-            <select class="form-select form-select-sm" aria-label="Default select example" [(ngModel)]="selectDepartamento">
+            <select class="form-select form-select-sm" [(ngModel)]="selectDepartamento" aria-label="Default select example">
                 <option selected>Selecciona un departamento</option>
                 <option value="ANCASH">Ancash</option>
                 <option value="APURIMAC">Apurimac</option>
@@ -40,7 +41,7 @@
         </div>
         <div class="col">
             <!-- INPUTS PARA EL SEXO -->
-            <select class="form-select form-select-sm" aria-label="Default select example" [(ngModel)]="selectSexo">
+            <select class="form-select form-select-sm" [(ngModel)]="selectSexo" aria-label="Default select example">
                 <option selected>Selecciona tu sexo</option>
                 <option value="M">Hombre</option>
                 <option value="F">Mujer</option>
@@ -49,10 +50,33 @@
     </div>
     <!-- BOTON PARA LLAMAR A LA FUNCION -->
     <div class="col-auto mt-3 text-center">
-        <button (click)="enviarData()" type="button" class="btn btn-secondary">Filtrar</button>
+        <button type="button" class="btn btn-secondary" (click)="construirGrafico()">Filtrar</button>
     </div>
-    <div>
-        <!-- COMPONENTE GRAFICO -->
-        <app-grafico> </app-grafico>
+    <div class="row mt-3">
+        <div class="col">
+            <div class="mt-4">
+                <!-- TABLA RESUMEN -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Entre 10 y 14 años</th>
+                        <th scope="col">Entre 12 y 17 años</th>
+                        <th scope="col">Entre 15 y 19 años</th>
+                        <th scope="col">Informacion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let categoria of this.categorias; index as i">
+                            <th>{{categoria}}</th>
+                            <td>{{this.caso1Array[i]}}</td>
+                            <td>{{this.caso2Array[i]}}</td>
+                            <td>{{this.caso3Array[i]}}</td>
+                            <td> <button [routerLink]='obtenerIdArticulo(categoria)' class="btn btn-danger btn-sm">Ver articulo</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>

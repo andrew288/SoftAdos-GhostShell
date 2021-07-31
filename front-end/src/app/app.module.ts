@@ -17,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { ArticuloComponent } from './components/articulo/articulo/articulo.component';
 import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,8 @@ import { ProfileEditComponent } from './components/profile-edit/profile-edit.com
     HttpClientModule,
     FormsModule,
     HighchartsChartModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -39,3 +39,15 @@ class DataTamizajeView(APIView):
 		json_data = codecs.open('public/templates/datosAdolescentes.json','r','utf-8-sig')
 		content = json.load(json_data)['Tamizaje_Adolescente']
 		return Response(content)
+
+class DataAdolescentes(APIView):
+	def get(self, request, format=None):
+		json_data = codecs.open('public/templates/datosAdolescentes.json','r','utf-8-sig')
+		content = json.load(json_data)
+		return Response(content)
+
+class DataMapas(APIView):
+	def get(self, request, format=None):
+		json_data = codecs.open('public/templates/datosMapas.json','r','utf-8-sig')
+		content = json.load(json_data)
+		return Response(content)
