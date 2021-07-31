@@ -1,7 +1,7 @@
 
 from django.shortcuts import render, get_object_or_404
 from rest_framework import generics
-from .serializers import PerfilesSerializer, ComentariosSerializer, PublicacionesSerializer, CategoriasSerializer, UserSerializer, UserGetSerializer
+from .serializers import PerfilesSerializer, ComentariosSerializer, PublicacionesSerializer, CategoriasSerializer, UserSerializer, UserGetSerializer, PerfilesConDatosUsuarioSerializer
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication, BasicAuthentication
 from .models import Articulos, Perfiles, Comentarios_publicacion,Comentarios_articulo, Publicaciones, Categorias
 from .serializers import PerfilesSerializer, ComentariosSerializer, PublicacionesSerializer, CategoriasSerializer ,ArticulosSerializer
@@ -80,7 +80,7 @@ class PerfilesDetail(generics.RetrieveUpdateDestroyAPIView):
         Clase generica de perfiles, se utiliza para puntos finales de lectura, escritura y eliminación
     """
     queryset = Perfiles.objects.all()
-    serializer_class = PerfilesSerializer
+    serializer_class = PerfilesConDatosUsuarioSerializer
 
 
 class ArticulosList(generics.ListCreateAPIView):

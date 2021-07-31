@@ -1,3 +1,4 @@
+import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 import { ArticuloComponent } from './components/articulo/articulo/articulo.component';
 import { CheckLoginGuard } from './shared/guards/check-login.guard';
 import { PerfilComponent } from './components/perfil/perfil.component';
@@ -44,6 +45,10 @@ const routes: Routes = [
         path: 'articulo/:variable',
         component: ArticuloComponent,
       },
+      {
+        path: 'profile-edit',
+        component: ProfileEditComponent,
+      }
     ]
   },
 ];

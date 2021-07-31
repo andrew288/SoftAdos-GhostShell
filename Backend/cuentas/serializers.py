@@ -39,7 +39,7 @@ class PerfilesConDatosUsuarioSerializer(serializers.ModelSerializer):
     """
         Serializador de los perfiles con el usuario 
     """
-    usu = UserSerializer(read_only=True)
+    usuario = UserGetSerializer(read_only=True)
     class Meta:
         model = Perfiles
         fields = '__all__'

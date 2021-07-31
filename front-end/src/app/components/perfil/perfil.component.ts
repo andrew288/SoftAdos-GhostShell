@@ -8,7 +8,6 @@ import { environment } from 'src/environments/environment';
 })
 export class PerfilComponent implements OnInit {
   public infoPerfil:any=[];
-  public infoUser:any=[];
   constructor(
     private serv:ServiceDataService,
   ) { }
@@ -18,14 +17,10 @@ export class PerfilComponent implements OnInit {
       this.infoPerfil=res;
       console.log(res)
     });
-    this.serv.get(`${environment.API_URL}user/${localStorage.id}`).subscribe(res => {
-      this.infoUser=res;
-      console.log(res)
-    })
   }
 
   obtenerNombreCompleto():string{
-    return `${this.infoUser.first_name} ${this.infoUser.last_name}`
+    return `${this.infoPerfil.usuario.first_name} ${this.infoPerfil.usuario.last_name}`
   }
 
   obtenerSexo():string{

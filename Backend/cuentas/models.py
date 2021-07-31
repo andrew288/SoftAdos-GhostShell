@@ -33,7 +33,7 @@ class Perfiles(models.Model):
         ('u','Usuario nuevo'),
     )
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name='usu')
-    foto = models.ImageField('Foto de perfil', upload_to='media', height_field=None, width_field=None,blank=True, null=True)
+    foto = models.ImageField('Foto de perfil', upload_to='media/', height_field=None, width_field=None,blank=True, null=True)
     genero = models.CharField('Genero', max_length=1, choices=GENERO, blank=True, null=True)
     biografia = models.TextField('Descripcion de bigrafia', blank=True, null=True)
     fecNacimiento = models.DateField('Fecha de nacimiento', blank=True, null=True)
@@ -102,6 +102,7 @@ class Articulos(models.Model):
     resumen = models.TextField(null= True)
     contenido = models.TextField(null=True)
     art_archivo = models.FileField(upload_to='documents/', blank=True, null = True)
+    imagen = models.ImageField('Imagen', upload_to='articulos/', height_field=None, width_field=None,blank=True, null=True)
     #posicion = models.CharField(max_length=50, choices=POSICION, default = TOP_MAIN)
     categoria = models.ForeignKey(Categorias, on_delete=(models.RESTRICT), null = True)
 
