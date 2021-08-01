@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Perfiles, Comentarios_articulo, Publicaciones, Categorias, Articulos
+from .models import Perfiles, Comentarios_publicacion, Categorias, Articulos
 
 #Serializadores
 
@@ -58,19 +58,21 @@ class ComentariosSerializer(serializers.ModelSerializer):
     """
         Serializador de los comentarios que realiza un usuario
     """
+    perfil = PerfilesConDatosUsuarioSerializer(read_only=True)
     class Meta:
-        model = Comentarios_articulo
-        fields = ('id', 'usuario', 'perfil', 'articulo','comentario', 'reply_to')
+        model = Comentarios_publicacion
+        fields = '__all__'
 
+class ComentariosSetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comentarios_publicacion
+        fields = '__all__'
 
-class PublicacionesSerializer(serializers.ModelSerializer):
-    """
-        Serializador de las publicaciones que puede realizar un usuario
-    """
+"""class PublicacionesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Publicaciones
         fields = ('id', 'usuario', 'perfil', 'titulo', 'publicacion', 'creado', 'modificado', 'url', 'vistas', 'categoria')
-
+"""
         
 class CategoriasSerializer(serializers.ModelSerializer):
     """

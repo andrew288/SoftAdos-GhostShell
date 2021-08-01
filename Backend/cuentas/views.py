@@ -1,10 +1,10 @@
 
 from django.shortcuts import render, get_object_or_404
 from rest_framework import generics
-from .serializers import PerfilesSerializer, ComentariosSerializer, PublicacionesSerializer, CategoriasSerializer, UserSerializer, UserGetSerializer, PerfilesConDatosUsuarioSerializer
+from .serializers import PerfilesSerializer, ComentariosSerializer, CategoriasSerializer, UserSerializer, UserGetSerializer, PerfilesConDatosUsuarioSerializer
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication, BasicAuthentication
-from .models import Articulos, Perfiles, Comentarios_publicacion,Comentarios_articulo, Publicaciones, Categorias
-from .serializers import PerfilesSerializer, ComentariosSerializer, PublicacionesSerializer, CategoriasSerializer ,ArticulosSerializer
+from .models import Articulos, Perfiles, Comentarios_publicacion, Categorias
+from .serializers import PerfilesSerializer, ComentariosSerializer, CategoriasSerializer ,ArticulosSerializer, ComentariosSetSerializer
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -101,31 +101,31 @@ class ComentariosList(generics.ListCreateAPIView):
     """
         Clase generica para  lectura y escritura de comentarios
     """
-    queryset = Comentarios_articulo.objects.all()
-    serializer_class = ComentariosSerializer
+    queryset = Comentarios_publicacion.objects.all()
+    serializer_class = ComentariosSetSerializer
 
-class ComentariosDetail(generics.RetrieveUpdateDestroyAPIView):
+class ComentariosDetail(generics.ListAPIView):
     """
         Clase generica de comentarios, , se utiliza para puntos finales de lectura, escritura y eliminación
     """
-    queryset = Comentarios_articulo.objects.all()
     serializer_class = ComentariosSerializer
 
+    def get_queryset(self):
+        """
+        This view should return a list of all the purchases for
+        the user as determined by the username portion of the URL.
+        """
+        articulo = self.kwargs['articulo']
+        return Comentarios_publicacion.objects.filter(articulo=articulo)
 
-class PublicacionesList(generics.ListCreateAPIView):
-    """
-        Clase generica para  lectura y escritura de publicaciones
-    """
+"""class PublicacionesList(generics.ListCreateAPIView):
     queryset = Publicaciones.objects.all()
     serializer_class = PublicacionesSerializer
 
 class PublicacionesDetail(generics.RetrieveUpdateDestroyAPIView):
-    """
-        Clase generica de publicaciones, se utiliza para puntos finales de lectura, escritura y eliminación 
-    """
     queryset = Publicaciones.objects.all()
     serializer_class = PublicacionesSerializer
-
+"""
 
 class CategoriasList(generics.ListCreateAPIView):
     """

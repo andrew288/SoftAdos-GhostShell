@@ -62,10 +62,7 @@ class Categorias(models.Model):
         return self.nombre
 
 
-class Publicaciones(models.Model):
-    """
-        Se crea un modelo para que el usuario pueda realizar publicaciones(tabla)
-    """
+"""class Publicaciones(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)
     perfil = models.ForeignKey(Perfiles, on_delete=models.PROTECT)
     titulo = models.CharField(max_length=255)
@@ -86,7 +83,7 @@ class Publicaciones(models.Model):
 
     def save(self, *args, **kwargs):
         self.url = slugify(self.titulo)
-        super(Publicaciones, self).save(*args, **kwargs)    
+        super(Publicaciones, self).save(*args, **kwargs)    """
 
 class Articulos(models.Model):
 
@@ -107,29 +104,25 @@ class Articulos(models.Model):
     categoria = models.ForeignKey(Categorias, on_delete=(models.RESTRICT), null = True)
 
     def __str__(self):
-        return self.titulo 
+        return self.titulo
 
 
 class Comentarios_publicacion(models.Model):
     """
         Se crea un modelo para que un usuario pueda realizar comentarios(tabla)
     """
-    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
     perfil = models.ForeignKey(Perfiles, on_delete=models.PROTECT)
-    publicacion = models.ForeignKey(Publicaciones, on_delete=models.PROTECT)
+    articulo = models.ForeignKey(Articulos, on_delete=models.PROTECT)
     comentario = models.TextField(null=True)
-    reply_to = models.ForeignKey("self", null=True, blank=True, on_delete=models.CASCADE, related_name='replies')
+    fecha_publicacion = models.DateField(auto_now=True)
     def __str__(self):
-        return self.usuario
+        return self.comentario
 
 
-class Comentarios_articulo(models.Model):
-    """
-        Se crea un modelo para que un usuario pueda realizar comentarios(tabla)
-    """
+"""class Comentarios_articulo(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)
     perfil = models.ForeignKey(Perfiles, on_delete=models.PROTECT)
     articulo = models.ForeignKey(Articulos, on_delete=models.PROTECT)
     comentario = models.TextField(null=True)
-    reply_to = models.ForeignKey("self", null=True, blank=True, on_delete=models.CASCADE, related_name='replies')
+    reply_to = models.ForeignKey("self", null=True, blank=True, on_delete=models.CASCADE, related_name='replies')"""
     

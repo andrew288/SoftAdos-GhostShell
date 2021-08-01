@@ -1,8 +1,10 @@
+import { AuthService } from 'src/app/servicios/auth.service';
 import { ServiceDataService } from 'src/app/servicios/service-data.service';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-edit',
@@ -14,9 +16,10 @@ export class ProfileEditComponent implements OnInit {
   public formProfile!:FormGroup;
   public model!: NgbDateStruct;
   constructor(
-
     private serv:ServiceDataService,
+    private auth:AuthService,
     private formBuilder: FormBuilder,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -25,7 +28,7 @@ export class ProfileEditComponent implements OnInit {
       console.log(res);
       this.formProfile = this.formBuilder.group(
         {
-          first_name:[this.infoPerfil.usuario.first_name,
+          /*first_name:[this.infoPerfil.usuario.first_name,
             [
               Validators.minLength(1),
             ]
@@ -34,7 +37,7 @@ export class ProfileEditComponent implements OnInit {
             [
               Validators.minLength(1),
             ]
-          ],
+          ],*/
           direccion: [this.infoPerfil.direccion,
             [
               Validators.minLength(1),
@@ -57,7 +60,14 @@ export class ProfileEditComponent implements OnInit {
     }
   send(): any {
     const formValue = this.formProfile.value;
-    console.log(formValue)
+    this.auth.updatePerfil(formValue,this.infoPerfil.id).subscribe(
+      data => {
+        this.router.navigate(['/analisis'])
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   linkWebsite(cadena:string): string {

@@ -6,9 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { SharedModule } from './components/shared/shared.module';
-import { FiltrosComponent } from './components/filtros/filtros.component';
 import { ContactComponent } from './components/contact/contact.component';
-import { GraficoComponent } from './components/grafico/grafico.component';
 import { FormsModule } from '@angular/forms';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { LoginComponent } from './components/login/login.component';
@@ -23,9 +21,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppComponent,
     HomeComponent,
     LayoutComponent,
-    FiltrosComponent,
     ContactComponent,
-    GraficoComponent,
     LoginComponent,
     RegisterComponent,
     PerfilComponent,

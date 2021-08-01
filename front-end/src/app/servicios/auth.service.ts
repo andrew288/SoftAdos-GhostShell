@@ -66,10 +66,22 @@ export class AuthService {
     {headers: this.httpHeaders});
   }
 
-  updatePerfil(user :any): Observable<any> {
-    const body =  {first_name : user.first_name,last_name : user.last_name,email : user.email,username : user.username,password : user.password};
-    return this.http.post('http://localhost:8000' + '/user', body,
-    {headers: this.httpHeaders});
+  updatePerfil(perfil :any, id:any): Observable<any> {
+    const body =  {  
+        genero: perfil.genero,
+        biografia: perfil.biografia,
+        direccion: perfil.direccion,
+        url_website: perfil.url_website,
+        url_twitter: perfil.url_twitter,
+        url_instagram: perfil.url_instagram,
+        url_facebook: perfil.url_facebook,
+    };
+    return this.http.put(`${environment.API_URL}perfiles/${id}`, body,{headers: this.httpHeaders});
   }
 
+  createComentario(comentario :any, idArticulo :any, idUsuario :any): Observable<any> {
+    const body =  {comentario:comentario.comentario, articulo:idArticulo, perfil:idUsuario};
+    return this.http.post(`${environment.API_URL}comentarios`, body,
+    {headers: this.httpHeaders});
+  }
 }
