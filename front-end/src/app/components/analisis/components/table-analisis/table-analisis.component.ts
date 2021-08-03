@@ -1,6 +1,7 @@
 import { ServiceDataService } from 'src/app/servicios/service-data.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, enableProdMode } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-table-analisis',
   templateUrl: './table-analisis.component.html',
@@ -22,9 +23,13 @@ export class TableAnalisisComponent implements OnInit {
   public selectDepartamento:string="AREQUIPA"
   public selectSexo:string="M"
 
+  public enlaces:any=[];
+
   constructor(
     private serv:ServiceDataService,
-  ) { }
+    private router: Router,
+  ) {  
+  }
 
   getTipoData():string{
     let tipoData="";
@@ -58,15 +63,20 @@ export class TableAnalisisComponent implements OnInit {
   }
 
   construirGrafico():void {
-    this.caso1Array=[]
-    this.caso2Array=[]
-    this.caso3Array=[]
-    this.categorias=[]
-    this.dataGrafico=[]
-    this.filtrarData();
-    //Llamamos a funciones que actualizaran nuestras propiedades
-    this.obtenerCategorias()
-    this.obtenerSeries()
+    if(this.selectDepartamento=="a" || this.selectSexo=="a" || this.selectTipoData=="a"){
+      window.alert("Asegurese de ingresar correctamente los campos")
+    }
+    else{
+      this.caso1Array=[]
+      this.caso2Array=[]
+      this.caso3Array=[]
+      this.categorias=[]
+      this.dataGrafico=[]
+      this.filtrarData();
+      //Llamamos a funciones que actualizaran nuestras propiedades
+      this.obtenerCategorias()
+      this.obtenerSeries()
+    }
   }
   filtrarData():void {
     let indice= this.selectTipoData
@@ -120,7 +130,7 @@ export class TableAnalisisComponent implements OnInit {
       case "CIFOSIS POSTURAL":
         id="3";
         break;
-      case "DISMINUCIÓN DE LA AGUDEZA VISUAL SIN ESPECIFICACION":
+      case "DISMINUCION DE LA AGUDEZA VISUAL SIN ESPECIFICACION":
         id="4";
         break;
       case "ESCOLIOSIS IDIOPATICA JUVENIL":

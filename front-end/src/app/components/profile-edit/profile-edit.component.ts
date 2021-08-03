@@ -48,8 +48,16 @@ export class ProfileEditComponent implements OnInit {
               Validators.minLength(1),
             ]
           ],
-          sexo: [this.infoPerfil.sexo,],
-          fecNacimiento: [this.infoPerfil.fecNacimiento],
+          sexo: [this.infoPerfil.sexo,
+            [
+              Validators.required,
+            ]
+          ],
+          fecNacimiento: [this.infoPerfil.fecNacimiento,
+            [
+              Validators.required,
+            ]
+          ],
           url_website:[this.linkWebsite(this.infoPerfil.url_website)],
           url_twitter:[this.linkTwitter(this.infoPerfil.url_twitter)],
           url_instagram:[this.linkInstagram(this.infoPerfil.url_instagram)],
@@ -62,7 +70,7 @@ export class ProfileEditComponent implements OnInit {
     const formValue = this.formProfile.value;
     this.auth.updatePerfil(formValue,this.infoPerfil.id).subscribe(
       data => {
-        this.router.navigate(['/analisis'])
+        this.router.navigate(['/profile'])
       },
       error => {
         console.log(error);

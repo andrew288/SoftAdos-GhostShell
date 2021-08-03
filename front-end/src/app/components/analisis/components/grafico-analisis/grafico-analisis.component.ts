@@ -12,7 +12,7 @@ export class GraficoAnalisisComponent implements OnInit {
   public dataGeneral:any=[]
   public dataGrafico:any=[]
   //para graficar
-  public Highcharts = Highcharts
+  public Highcharts:typeof Highcharts = Highcharts
   public chart: any
   //creamos 3 arreglos para los 3 tipos de casos
   public caso1Array:number[]=[]
@@ -61,6 +61,13 @@ export class GraficoAnalisisComponent implements OnInit {
   }
 
   construirGrafico():void {
+    console.log(this.selectDepartamento)
+    console.log(this.selectSexo)
+    console.log(this.selectTipoData)
+    if(this.selectDepartamento=="a" || this.selectSexo=="a" || this.selectTipoData=="a"){
+      window.alert("Asegurese de ingresar correctamente los campos")
+    }
+    else {
     this.caso1Array=[]
       this.caso2Array=[]
       this.caso3Array=[]
@@ -109,6 +116,9 @@ export class GraficoAnalisisComponent implements OnInit {
           dataLabels: {
             enabled: true
           }
+        },
+        series:{
+
         }
       },
       //leyenda
@@ -142,7 +152,10 @@ export class GraficoAnalisisComponent implements OnInit {
         }
       ]
     };
+   }
   }
+
+
   filtrarData():void {
     let indice= this.selectTipoData
     //Filtramos la data

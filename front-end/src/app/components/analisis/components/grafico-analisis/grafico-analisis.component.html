@@ -4,7 +4,7 @@
         <div class="col">
             <!-- INPUTS PARA EL TIPO DE INFORMACION -->
             <select class="form-select form-select-sm" [(ngModel)]="selectTipoData">
-                <option [selected]="true">Selecciona el tipo de informacion</option>
+                <option value="a" [selected]="true">Selecciona el tipo de informacion</option>
                 <option value="Morbilidad_Adolescente">Morbilidad</option>
                 <option value="Riesgo_Adolescente">Riesgo</option>
                 <option value="Tamizaje_Adolescente">Tamizaje</option>
@@ -13,7 +13,7 @@
         <div class="col">
             <!-- INPUTS PARA EL DEPARTAMENTO -->
             <select class="form-select form-select-sm" [(ngModel)]="selectDepartamento" aria-label="Default select example">
-                <option selected>Selecciona un departamento</option>
+                <option value="a" selected>Selecciona un departamento</option>
                 <option value="ANCASH">Ancash</option>
                 <option value="APURIMAC">Apurimac</option>
                 <option value="AREQUIPA">Arequipa</option>
@@ -42,7 +42,7 @@
         <div class="col">
             <!-- INPUTS PARA EL SEXO -->
             <select class="form-select form-select-sm" [(ngModel)]="selectSexo" aria-label="Default select example">
-                <option selected>Selecciona tu sexo</option>
+                <option value="a" selected>Selecciona tu sexo</option>
                 <option value="M">Hombre</option>
                 <option value="F">Mujer</option>
             </select>

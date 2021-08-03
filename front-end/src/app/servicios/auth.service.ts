@@ -42,7 +42,7 @@ export class AuthService {
 
   logout(): void{
     localStorage.removeItem('token');
-    localStorage.removeItem('foto');
+    localStorage.removeItem('id');
     this.loggedIn.next(false)
   }
 
@@ -62,8 +62,8 @@ export class AuthService {
 
   createUser(user :any): Observable<any> {
     const body =  {first_name : user.first_name,last_name : user.last_name,email : user.email,username : user.username,password : user.password};
-    return this.http.post('http://localhost:8000' + '/user', body,
-    {headers: this.httpHeaders});
+    return this.http.post(`${environment.API_URL}user`, body,
+    {headers: this.httpHeaders}); 
   }
 
   updatePerfil(perfil :any, id:any): Observable<any> {

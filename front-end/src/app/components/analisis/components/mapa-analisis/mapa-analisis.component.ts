@@ -28,8 +28,13 @@ export class MapaAnalisisComponent implements OnInit {
   }
 
   construirMapa():void {
-    this.mapaFrame=this.sanitizer.bypassSecurityTrustHtml(this.dataMapa.Departamento[this.selectDepartamento].mapa);
-    console.log(this.mapaFrame)
+    if(this.selectDepartamento==-1){
+      window.alert("Asegurese de ingresar un campo correcto")
+    }
+    else{
+      this.mapaFrame=this.sanitizer.bypassSecurityTrustHtml(this.dataMapa.Departamento[this.selectDepartamento].mapa);
+      console.log(this.mapaFrame)
+    }
   }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { Router } from '@angular/router';
+import { HttpBackend, HttpErrorResponse,HttpEvent } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -11,13 +12,13 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   //creamos un FormGroups (propiedad)
-  public formLogin!:FormGroup;
+  public formLogin!: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
-    private authSvc:AuthService,
+    private authSvc: AuthService,
     private router: Router,
-  ){
+  ) {
   }
 
   //componente que se inicia
@@ -46,11 +47,15 @@ export class LoginComponent implements OnInit {
   //enviamos la informacion
   send(): any {
     const formValue = this.formLogin.value;
-    this.authSvc.login(formValue).subscribe( res => {
-      if(res){
+    this.authSvc.login(formValue).subscribe(res => {
+      if (res) {
         this.router.navigate(['/analisis'])
       }
-    })
+    },
+      (err: any) => {
+        400
+        window.alert("No se pudo iniciar sesión")
+      })
   }
 
 }
