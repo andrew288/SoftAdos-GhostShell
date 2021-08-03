@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from django.db.models.deletion import PROTECT
 from ckeditor.fields import RichTextField
 from django.utils.text import slugify
+from django.conf import settings
+from django.conf.urls.static import static
+from django.core.files.storage import FileSystemStorage
 
 #from typing_extensions import TypeVarTuple
 
@@ -33,7 +36,7 @@ class Perfiles(models.Model):
         ('u','Usuario nuevo'),
     )
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name='usu')
-    foto = models.ImageField('Foto de perfil', upload_to='media/', height_field=None, width_field=None,blank=True, null=True)
+    foto = models.FileField(storage=FileSystemStorage(location=settings.MEDIA_ROOT), upload_to='media/', default='media/anonimo.png')
     genero = models.CharField('Genero', max_length=1, choices=GENERO, blank=True, null=True)
     biografia = models.TextField('Descripcion de bigrafia', blank=True, null=True)
     fecNacimiento = models.DateField('Fecha de nacimiento', blank=True, null=True)
@@ -61,30 +64,6 @@ class Categorias(models.Model):
     def __str__(self):
         return self.nombre
 
-
-"""class Publicaciones(models.Model):
-    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
-    perfil = models.ForeignKey(Perfiles, on_delete=models.PROTECT)
-    titulo = models.CharField(max_length=255)
-    publicacion = RichTextField()
-    #imagen = models.ImageField(upload_to='')
-    creado = models.DateTimeField(auto_now_add=True)
-    modificado = models.DateTimeField(auto_now=True)
-    #borrador = models.BooleanField(default=True)
-    url = models.SlugField(max_length=255, unique=True, default='admin')
-    vistas = models.PositiveIntegerField(default=0)
-    categoria = models.ManyToManyField(Categorias)
-
-    class Meta:
-        ordering = ('titulo',)
-    
-    def __str__(self):
-        return '{} by @{}'.format(self.titulo, self.usuario.username)
-
-    def save(self, *args, **kwargs):
-        self.url = slugify(self.titulo)
-        super(Publicaciones, self).save(*args, **kwargs)    """
-
 class Articulos(models.Model):
 
     HOME_MAIN = "HM"
@@ -99,7 +78,7 @@ class Articulos(models.Model):
     resumen = models.TextField(null= True)
     contenido = models.TextField(null=True)
     art_archivo = models.FileField(upload_to='documents/', blank=True, null = True)
-    imagen = models.ImageField('Imagen', upload_to='articulos/', height_field=None, width_field=None,blank=True, null=True)
+    imagen = models.ImageField('Imagen', default='',upload_to='articulos/', height_field=None, width_field=None,blank=True, null=True)
     #posicion = models.CharField(max_length=50, choices=POSICION, default = TOP_MAIN)
     categoria = models.ForeignKey(Categorias, on_delete=(models.RESTRICT), null = True)
 
@@ -115,14 +94,13 @@ class Comentarios_publicacion(models.Model):
     articulo = models.ForeignKey(Articulos, on_delete=models.PROTECT)
     comentario = models.TextField(null=True)
     fecha_publicacion = models.DateField(auto_now=True)
+
     def __str__(self):
         return self.comentario
 
-
-"""class Comentarios_articulo(models.Model):
-    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
-    perfil = models.ForeignKey(Perfiles, on_delete=models.PROTECT)
-    articulo = models.ForeignKey(Articulos, on_delete=models.PROTECT)
-    comentario = models.TextField(null=True)
-    reply_to = models.ForeignKey("self", null=True, blank=True, on_delete=models.CASCADE, related_name='replies')"""
-    
+    def get_numero_reacciones(self):
+        c = 0
+        orderitems = self.orderitem_set.all()
+        for item in orderitems:
+            c=c+1
+        return c

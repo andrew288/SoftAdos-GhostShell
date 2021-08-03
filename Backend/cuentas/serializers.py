@@ -53,17 +53,16 @@ class ArticulosSerializer(serializers.ModelSerializer):
         model = Articulos
         fields = '__all__'
 
+class ComentariosSetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comentarios_publicacion
+        fields = '__all__'
 
 class ComentariosSerializer(serializers.ModelSerializer):
     """
         Serializador de los comentarios que realiza un usuario
     """
     perfil = PerfilesConDatosUsuarioSerializer(read_only=True)
-    class Meta:
-        model = Comentarios_publicacion
-        fields = '__all__'
-
-class ComentariosSetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comentarios_publicacion
         fields = '__all__'
